@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>{{ titulo }}</title>
+{% endblock %}
+
+
+{% block body %}
+
+
+<div class="flex flex-row p-4 w-full justify-center">
+    <div class="w-2/5">
+        <form action="/update/{{libro.id}}" method="post" class="flex flex-col gap-4 ">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="titulo" placeholder="Titulo" value="{{libro.titulo}}">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="autor" placeholder="Autor" value="{{libro.autor}}">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="genero" placeholder="Genero" value="{{libro.genero}}">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="descripcion" placeholder="Descripcion" value="{{libro.descripcion}}">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="portada" placeholder="Link Portada" value="{{libro.portada}}">
+            <input class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+                 type="submit" value="Editar">
+        </form>
+    </div>
+{% endblock %}

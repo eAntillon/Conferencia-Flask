@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>{{ titulo }}</title>
+{% endblock %}
+
+
+{% block body %}
+
+
+<div class="flex flex-row p-4">
+    <div class="w-1/5">
+        <form action="add" method="post" class="flex flex-col gap-4 ">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="titulo" placeholder="Titulo">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="autor" placeholder="Autor">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="genero" placeholder="Genero">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="descripcion" placeholder="Descripcion">
+            <input class="w-full rounded-lg border-2 border-gray-200 p-3 text-sm"
+                 type="text" name="portada" placeholder="Link Portada">
+            <input class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+                 type="submit" value="Agregar">
+        </form>
+    </div>
+    
+    <!-- Mostrar libros -->
+   {% if libros | length == 0 %}
+        <div class="w-3/5 px-4">
+            <h1 class="text-2xl font-bold">No hay libros</h1>
+        </div>
+    {% else %}
+        <div class="grid grid-cols-3 gap-4 px-4 w-3/5">
+            {% for libro in libros %}
+                <div class="border-2 rounded-lg p-4">
+                    <h2 class="font-bold text-xl">{{ libro.titulo }}</h2>
+                    <p>{{ libro.descripcion }}</p>
+                    <p>{{ libro.genero }}</p>
+                    <p>{{ libro.autor }}</p>
+                    <img src="{{libro.portada}}" alt="" srcset="" width="200"></img>
+
+                    <div class="flex gap-4 py-4">
+                        <a href="{{url_for('libros.actualizarLibro', id=libro.id)}}" class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">Editar</a>
+                        <form action="/delete/{{libro.id}}" method="post">
+                            <button type="submit" class="inline-block rounded-lg bg-red-500 px-5 py-3 text-sm font-medium text-white">Eliminar</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+
+
+
+{% endblock %}
